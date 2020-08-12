@@ -15,7 +15,7 @@ public class Crate : MonoBehaviour
 
     public void Dead()
     {
-        Instantiate(cherry, transform.position, transform.rotation);
+        Instantiate(cherry, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

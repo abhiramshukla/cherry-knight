@@ -18,10 +18,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask enemyLayers;
     public Transform playerPosition;
     public Rigidbody2D rb;
+    public HealthBar healthBar;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        healthBar.SetInitialValue();
     }
 
     // Update is called once per frame
@@ -58,7 +60,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.IsTouchingLayers(enemyLayers))
         {
-            StartCoroutine(Death());
+            healthBar.DecreaseSliderValue(20);
+
+            Vector2 difference = transform.position - attackPoint.position;
+
+            transform.position = new Vector2(transform.position.x + difference.x, transform.position.y);
+
+            StartCoroutine(DamageBuffer());
+
+            if (healthBar.GetSliderValue() < 1)
+            {
+                StartCoroutine(Death());
+            }
         }
     }
 
@@ -103,6 +116,15 @@ public class PlayerMovement : MonoBehaviour
     {
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
+    }
+
+    IEnumerator DamageBuffer()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        yield return new WaitForSeconds(0.3f);
+
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     IEnumerator Death ()

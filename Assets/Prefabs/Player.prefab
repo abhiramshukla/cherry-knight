@@ -312,12 +312,13 @@ MonoBehaviour:
   attackRange: 0.7
   destructibleLayer:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 512
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
   playerPosition: {fileID: 191585967908363099}
   rb: {fileID: 191585967908363096}
+  healthBar: {fileID: 0}
 --- !u!95 &191585967908363092
 Animator:
   serializedVersion: 3
