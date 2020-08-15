@@ -319,6 +319,8 @@ MonoBehaviour:
   playerPosition: {fileID: 191585967908363099}
   rb: {fileID: 191585967908363096}
   healthBar: {fileID: 0}
+  checkpoint: {fileID: 4956162429818387449, guid: a598ed0dfe296fc4ba294c27aaaf7f49,
+    type: 3}
 --- !u!95 &191585967908363092
 Animator:
   serializedVersion: 3

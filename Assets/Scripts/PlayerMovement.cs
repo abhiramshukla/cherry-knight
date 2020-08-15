@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerPosition;
     public Rigidbody2D rb;
     public HealthBar healthBar;
+    public Checkpoint checkpoint;
 
     void Start()
     {
@@ -135,11 +136,18 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.58f);
 
-        //Destroy(gameObject);
+        Vector2 Spawn = new Vector2(1, 0);
 
-        Score.scoreByGems = 0;
-        Score.scoreByEnemy = 0;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (checkpoint.checkpoint.x > Spawn.x)
+        {
+            transform.position = new Vector2(checkpoint.checkpoint.x, checkpoint.checkpoint.y + 2);
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            animator.SetBool("Death", false);
+        } else
+        {
+            Score.scoreByGems = 0;
+            Score.scoreByEnemy = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
